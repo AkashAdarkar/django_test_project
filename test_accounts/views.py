@@ -2,14 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("home Page")
+    return render(request,'test_accounts/dashboard.html')
 
 def about(request):
-    return HttpResponse("about")
+    return render(request,'test_accounts/about.html')
 
 def products(request):
-    return HttpResponse("Products")
+   return render(request,'test_accounts/products.html')
 
 
 def customers(request):
-    return HttpResponse("Customers")
+    return render(request,'test_accounts/customers.html')
