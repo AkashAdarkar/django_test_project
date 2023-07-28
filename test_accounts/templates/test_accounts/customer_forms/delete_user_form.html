@@ -1,0 +1,15 @@
+{% extends 'test_accounts/index.html' %}
+{% load static %}
+
+{% block content %}
+<form action="{% url 'delete_customer' context.customer.id %}" method="POST">
+
+
+    {%csrf_token%}
+    <p>delete <b>
+        "{{context.customer.name}}" ?
+    </b></p>
+    <button>Delete</button>
+    <a href="{% url 'home' %}">cancel</a>
+</form>
+{% endblock %}

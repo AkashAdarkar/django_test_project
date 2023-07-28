@@ -1,0 +1,16 @@
+{% extends 'test_accounts/index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<form action="" method="POST">
+
+    {%csrf_token%}
+    {{context.form}}
+
+
+    <button>SAVE</button>
+   <a href="{% url 'home'%}">cancel</a>
+</form>
+{% endblock %}

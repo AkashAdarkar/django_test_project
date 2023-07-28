@@ -1,0 +1,15 @@
+{% extends 'test_accounts/index.html' %}
+{% load static %}
+
+{%  block content %}
+
+<form action="" method="POST">
+
+
+    {% csrf_token %}
+    {{ context.form }}
+<button type="save">Save</button>
+<button type="reset">Reset</button>
+
+</form>
+{% endblock %}
