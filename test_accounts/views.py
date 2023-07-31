@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.forms import inlineformset_factory #way to create multiple forms in django
 from .models import *
 from  .forms  import OrderForm,CustomerForm
 
@@ -75,16 +76,22 @@ def deleteCustomer(request,pk):
 
 ###ORDER####
 
-def createOrder(request):
-    form = OrderForm()
-    if request.method == 'POST':
-        #print('printing POST',request.POST)
-        form =OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    context={'form':form}
-    return render(request,'test_accounts/order_forms/create_order_form.html',{'context':context})    
+def createOrder(request, pk):
+	OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=3 )
+	customer = Customer.objects.get(id=pk)
+	formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
+	#form = OrderForm(initial={'customer':customer})
+	if request.method == 'POST':
+		#print('Printing POST:', request.POST)
+		#form = OrderForm(request.POST)
+		formset = OrderFormSet(request.POST, instance=customer)
+		if formset.is_valid():
+			formset.save()
+			return redirect('/')
+
+	context = {'form':formset}
+	return render(request, 'test_accounts/order_forms/create_order_form.html',{'context':context} )
+     
 
 
 

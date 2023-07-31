@@ -8,7 +8,11 @@
 
 <form action="" method="POST">
     {% csrf_token %}
-    {{context.form}}
+    {{ context.form.management_form }}  <!--order wsnt saving because of this.-->
+    {% for field in context.form %}
+        {{field}}
+        <hr>
+    {% endfor %}
     <button type="submit">Submit</button>
 </form>
 

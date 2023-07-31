@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+# from django.forms import inlineformset_factory
 
 from .models import Order,Customer
 
@@ -13,3 +14,5 @@ class CustomerForm(ModelForm):
     class Meta:
         model = Customer
         fields = ['name','phone','email']
+
+# OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=1)
